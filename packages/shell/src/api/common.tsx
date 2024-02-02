@@ -175,6 +175,7 @@ class SkeletonCabin implements IPublicApiCommonSkeletonCabin {
   private readonly [skeletonSymbol]: InnerSkeleton;
 
   readonly [skeletonCabinSymbol]: any;
+  private __test: any;
 
   constructor(skeleton: InnerSkeleton) {
     this[skeletonSymbol] = skeleton;
@@ -190,8 +191,13 @@ class SkeletonCabin implements IPublicApiCommonSkeletonCabin {
   }
 
   get Workbench(): any {
+    if (this.__test) return this.__test;
     const innerSkeleton = this[skeletonSymbol];
     return (props: any) => <InnerWorkbench {...props} skeleton={innerSkeleton} />;
+  }
+
+  set Workbench(Workbench) {
+    this.__test = Workbench;
   }
 
   /**
